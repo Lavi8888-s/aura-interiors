@@ -178,13 +178,19 @@
   let stepTime = Math.abs(Math.floor(duration / range));
   let timer = setInterval(() => {
     current += increment;
-    obj.textContent = current;
-    if (current === end) {
-      obj.textContent = current + "+"; 
+    // If we're at the last step and this is 'projectsCompleted', append '+'
+    if (current === end && id === "projectsCompleted") {
+      obj.textContent = current + "+";
       clearInterval(timer);
+    } else if (current === end) {
+      obj.textContent = current;
+      clearInterval(timer);
+    } else {
+      obj.textContent = current;
     }
   }, stepTime);
 }
+
 
     const statSection = document.getElementById("stats");
     let statsStarted = false;
