@@ -6,7 +6,7 @@
 }
 
 :root {
-  --primary: #081f49;
+  --primary: #051534;
   --accent: #f4c430;
   --light-bg: #cce7f3;
   --text-dark: #000;
@@ -28,7 +28,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #081f49; /* navy blue background */
+  background-color: #1f1434; /* navy blue background */
   padding: 15px 30px;
   flex-wrap: wrap;
 }
@@ -384,7 +384,7 @@ body {
 
 
 .main-footer {
-  background-color: #081f49;
+  background-color: #1f1434;
   color: white;
   text-align: center;
   padding: 15px 0;

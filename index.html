@@ -171,17 +171,20 @@
     };
 
     function animateValue(id, start, end, duration) {
-      let obj = document.getElementById(id);
-      let range = end - start;
-      let current = start;
-      let increment = end > start ? 1 : -1;
-      let stepTime = Math.abs(Math.floor(duration / range));
-      let timer = setInterval(() => {
-        current += increment;
-        obj.textContent = current;
-        if (current === end) clearInterval(timer);
-      }, stepTime);
+  let obj = document.getElementById(id);
+  let range = end - start;
+  let current = start;
+  let increment = end > start ? 1 : -1;
+  let stepTime = Math.abs(Math.floor(duration / range));
+  let timer = setInterval(() => {
+    current += increment;
+    obj.textContent = current;
+    if (current === end) {
+      obj.textContent = current + "+"; 
+      clearInterval(timer);
     }
+  }, stepTime);
+}
 
     const statSection = document.getElementById("stats");
     let statsStarted = false;
@@ -190,7 +193,7 @@
       if (entries[0].isIntersecting && !statsStarted) {
         statsStarted = true;
         animateValue("happyClients", 0, 500, 2000);
-        animateValue("projectsCompleted", 0, 200, 2000);
+        animateValue("projectsCompleted", 0, 530, 2000);
         animateValue("yearsExperience", 0, 18, 2000);
       }
     }, { threshold: 0.5 });
