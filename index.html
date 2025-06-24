@@ -5,9 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Aura Interiors</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Lightbox CSS */
+    .lightbox {
+      display: none;
+      position: fixed; z-index: 9999;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox-img {
+      max-width: 90%; max-height: 80%;
+    }
+    .close, .prev, .next {
+      position: absolute;
+      color: #f4c430;
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .close { top: 20px; right: 30px; }
+    .prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .next { right: 20px; top: 50%; transform: translateY(-50%); }
+  </style>
 </head>
 <body>
-
   <!-- Header -->
   <header class="main-header">
     <img src="assets/auralogo.jpg" alt="Aura Logo" class="logo" />
@@ -15,18 +38,23 @@
       <ul>
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#gallery">Interior Gallery</a></li>
+        <li>
+          <select id="bhkFilter">
+            <option value="all">Our Projects</option>
+            <option value="2bhk">2 BHK</option>
+            <option value="3bhk">3 BHK</option>
+          </select>
+        </li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Free Quote Button -->
+  <!-- Quote Popup -->
   <div class="quote-button-container">
     <button id="openPopup">Get Free Quote</button>
   </div>
-
-  <!-- Popup Form -->
   <div class="popup-overlay" id="popup">
     <div class="popup">
       <h3>Get Your Free Quote</h3>
@@ -47,14 +75,7 @@
     </div>
   </div>
 
-  <!-- Home image row -->
-  <section class="image-row" id="gallery">
-    <div class="img-box"><img src="assets/interior1.jpg" alt="Interior 1" /></div>
-    <div class="img-box"><img src="assets/interior2.jpg" alt="Interior 2" /></div>
-    <div class="img-box"><img src="assets/interior3.jpg" alt="Interior 3" /></div>
-  </section>
-
-  <!-- Typing Quote Section -->
+  <!-- Typing Quote -->
   <section class="quote-section">
     <h2 id="typed-quote"></h2>
   </section>
@@ -63,46 +84,83 @@
   <section class="about-section" id="about">
     <div class="about-overlay">
       <div class="about-content">
-        <h2>About Aura Interiors</h2>
-        <p><strong>Our Story:</strong> <span style="color:#f4c430;">Aura Interiors</span> was founded with the vision of transforming ordinary spaces into extraordinary experiences. With over <span style="color: #f4c430;">18 years</span> of experience, we craft interiors that reflect elegance, functionality, and your personal style.</p>
+        <h2>About Auraa Interiors</h2>
+        <p><strong>Our Story:</strong> <span style="color:#f4c430;">Auraa Interiors</span> was founded with the vision of transforming ordinary spaces into extraordinary experiences. With over <span style="color: #f4c430;">18 years</span> of experience, we craft interiors that reflect elegance, functionality, and your personal style.</p>
         <p><strong>Our Mission:</strong> To design interiors that reflect personality, purpose, and comfort using customized, high-quality solutions.</p>
         <p><strong>Our Team:</strong> We are a group of passionate interior designers, craftsmen, and project managers committed to delivering excellence.</p>
       </div>
     </div>
   </section>
 
-  <!-- Statistics Section -->
+  <!-- Stats Section -->
   <section class="stats-section" id="stats">
-    <div class="stat-box">
-      <h2 id="happyClients">0</h2>
-      <p>Happy Clients</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="projectsCompleted">0</h2>
-      <p>Projects Completed</p>
-    </div>
-    <div class="stat-box">
-      <h2 id="yearsExperience">0</h2>
-      <p>Years of Experience</p>
-    </div>
+    <div class="stat-box"><h2 id="happyClients">0</h2><p>Happy Clients</p></div>
+    <div class="stat-box"><h2 id="projectsCompleted">0</h2><p>Projects Completed</p></div>
+    <div class="stat-box"><h2 id="yearsExperience">0</h2><p>Years of Experience</p></div>
   </section>
 
-  <!-- Full Gallery Section -->
+  <!-- Gallery with BHK Filter -->
   <section class="gallery-section" id="gallery">
     <h2 class="gallery-title">Interior Gallery</h2>
     <div class="gallery-grid">
-      <img src="assets/gallery1.jpeg" alt="Interior 1" />
-      <img src="assets/gallery2.jpg" alt="Interior 2" />
-      <img src="assets/gallery3.jpg" alt="Interior 3" />
-      <img src="assets/gallery4.jpg" alt="Interior 4" />
-      <img src="assets/gallery5.jpg" alt="Interior 5" />
-      <img src="assets/gallery6.jpg" alt="Interior 6" />
-      <img src="assets/gallery7.jpg" alt="Interior 7" />
-      <img src="assets/gallery8.jpg" alt="Interior 8" />
-      <img src="assets/gallery9.jpg" alt="Interior 9" />
-      <img src="assets/gallery10.jpg" alt="Interior 10" />
-      <img src="assets/gallery11.jpg" alt="Interior 11" />
-      <img src="assets/gallery12.jpg" alt="Interior 12" />
+      <!-- 2 BHK Images -->
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0027.jpg" alt="2 BHK 1">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0028.jpg" alt="2 BHK 2">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0029.jpg" alt="2 BHK 3">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0030.jpg" alt="2 BHK 4">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0031.jpg" alt="2 BHK 5">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0032.jpg" alt="2 BHK 6">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0033.jpg" alt="2 BHK 7">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0034.jpg" alt="2 BHK 8">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0035.jpg" alt="2 BHK 9">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0037.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0038.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0039.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0040.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0041.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0042.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0043.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0044.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0045.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0046.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0047.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0048.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0049.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0050.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0051.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0052.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0053.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0054.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0055.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0056.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0057.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0069.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0070.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0071.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0072.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0073.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0074.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0075.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0076.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0077.jpg" alt="2 BHK 10">
+      <img class="gallery-item 2bhk" src="assets/2bhk/IMG-20250623-WA0078.jpg" alt="2 BHK 10">
+
+
+      
+
+      <!-- ... up to IMG-20250623-WA0036.jpg -->
+      <!-- 3 BHK Images -->
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0006.jpg" alt="3 BHK 1">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0007.jpg" alt="3 BHK 2">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0008.jpg" alt="3 BHK 3">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0009.jpg" alt="3 BHK 4">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0010.jpg" alt="3 BHK 5">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0011.jpg" alt="3 BHK 6">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0012.jpg" alt="3 BHK 7">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0013.jpg" alt="3 BHK 8">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0014.jpg" alt="3 BHK 9">
+      <img class="gallery-item 3bhk" src="assets/3bhk/IMG-20250623-WA0015.jpg" alt="3 BHK 10">
+      <!-- ... up to IMG-20250623-WA0046.jpg -->
     </div>
   </section>
 
@@ -115,11 +173,9 @@
       <div class="contact-details">
         <h2>Better yet, see us in person!</h2>
         <p>We love our customers, so feel free to visit during normal business hours.</p>
-
         <a href="https://wa.me/919408884242" target="_blank" class="whatsapp-button">WhatsApp Us!</a>
-
         <div class="contact-info">
-          <h3>Aura Interiors</h3>
+          <h3>Auraa Interiors</h3>
           <p>Katraj Gangadham Road, Pune - 411048</p>
           <p>Contact: +91 94088 84242</p>
         </div>
@@ -129,82 +185,112 @@
 
   <!-- Footer -->
   <footer class="main-footer">
-    <p>&copy; 2025 Aura Interiors. All rights reserved.</p>
+    <p>&copy; 2025 Auraa Interiors. All rights reserved.</p>
   </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="Interior Lightbox View">
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
 
   <!-- JavaScript -->
   <script>
+    // Typing quote
     const quote = 'Shaping interiors, Defining experiences';
-    const words = quote.split(" ");
-    const target = document.getElementById("typed-quote");
-
-    words.forEach((word) => {
+    quote.split(" ").forEach(word => {
       const span = document.createElement("span");
-      if (word === "Shaping" || word === "Defining") {
-        span.style.color = "#f4c430";
-      }
       span.textContent = word + " ";
-      target.appendChild(span);
+      if (["Shaping", "Defining"].includes(word)) span.style.color = "#f4c430";
+      document.getElementById("typed-quote").appendChild(span);
     });
 
-    document.getElementById("openPopup").onclick = () => {
-      document.getElementById("popup").style.display = "flex";
-    };
-    document.getElementById("closePopup").onclick = () => {
-      document.getElementById("popup").style.display = "none";
-    };
+    // Popup handlers
+    document.getElementById("openPopup").onclick = () => document.getElementById("popup").style.display = "flex";
+    document.getElementById("closePopup").onclick = () => document.getElementById("popup").style.display = "none";
 
-    document.getElementById("quoteForm").onsubmit = function (e) {
-      e.preventDefault();
+document.getElementById("quoteForm").onsubmit = e => {
+  e.preventDefault();
+  const f = e.target;
+  const msgText = `Hello Auraa Interiors,
+Name: ${f.name.value}
+Address: ${f.address.value}
+BHK: ${f.bhk.value}
+Possession: ${f.possession.value}
+Phone: ${f.phone.value}`;
+  const msg = encodeURIComponent(msgText);
+  // Pre-fills but won't auto-send—WhatsApp requires user to press send
+  window.open(`https://api.whatsapp.com/send?phone=919408884242&text=${msg}`, "_blank");
+  document.getElementById("popup").style.display = "none";
+};
 
-      const name = document.getElementById("name").value;
-      const address = document.getElementById("address").value;
-      const bhk = document.getElementById("bhk").value;
-      const possession = document.getElementById("possession").value;
-      const phone = document.getElementById("phone").value;
 
-      const message = `Hello Aura Interiors,%0AName: ${name}%0AAddress: ${address}%0ABHK Type: ${bhk}%0APossession: ${possession}%0APhone: ${phone}`;
-      const whatsappURL = `https://wa.me/919408884242?text=${message}`;
-      window.open(whatsappURL, "_blank");
 
-      document.getElementById("popup").style.display = "none";
-    };
-
+    // Counters animation
     function animateValue(id, start, end, duration) {
-  let obj = document.getElementById(id);
-  let range = end - start;
-  let current = start;
-  let increment = end > start ? 1 : -1;
-  let stepTime = Math.abs(Math.floor(duration / range));
-  let timer = setInterval(() => {
-    current += increment;
-    // If we're at the last step and this is 'projectsCompleted', append '+'
-    if (current === end && id === "projectsCompleted") {
-      obj.textContent = current + "+";
-      clearInterval(timer);
-    } else if (current === end) {
-      obj.textContent = current;
-      clearInterval(timer);
-    } else {
-      obj.textContent = current;
+      const obj = document.getElementById(id);
+      let current = start;
+      const range = end - start;
+      const increment = end > start ? 1 : -1;
+      const step = Math.abs(Math.floor(duration / range));
+      const timer = setInterval(() => {
+        current += increment;
+        obj.textContent = current + (id === "projectsCompleted" ? "+" : "");
+        if (current === end) clearInterval(timer);
+      }, step);
     }
-  }, stepTime);
-}
 
-
-    const statSection = document.getElementById("stats");
-    let statsStarted = false;
-
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !statsStarted) {
-        statsStarted = true;
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
         animateValue("happyClients", 0, 500, 2000);
         animateValue("projectsCompleted", 0, 530, 2000);
         animateValue("yearsExperience", 0, 18, 2000);
       }
-    }, { threshold: 0.5 });
+    }, { threshold: 0.5 }).observe(document.getElementById("stats"));
 
-    observer.observe(statSection);
+    // Gallery filter
+    document.getElementById("bhkFilter").addEventListener("change", function () {
+      const value = this.value;
+      document.querySelectorAll(".gallery-item").forEach(img => {
+        img.style.display = (value === "all" || img.classList.contains(value)) ? "inline-block" : "none";
+      });
+    });
+
+    // Lightbox
+    const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.querySelector(".lightbox-img");
+    let currentIndex = 0;
+
+    function showLightbox(index) {
+      const visibleItems = galleryItems.filter(img => img.style.display !== "none");
+      if (visibleItems.length === 0) return;
+      lightboxImg.src = visibleItems[index].src;
+      currentIndex = index;
+      lightbox.style.display = "flex";
+    }
+
+    document.querySelector(".close").onclick = () => lightbox.style.display = "none";
+    document.querySelector(".prev").onclick = () => {
+      const visibleItems = galleryItems.filter(img => img.style.display !== "none");
+      currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+      lightboxImg.src = visibleItems[currentIndex].src;
+    };
+    document.querySelector(".next").onclick = () => {
+      const visibleItems = galleryItems.filter(img => img.style.display !== "none");
+      currentIndex = (currentIndex + 1) % visibleItems.length;
+      lightboxImg.src = visibleItems[currentIndex].src;
+    };
+
+    galleryItems.forEach((img, i) => {
+      img.onclick = () => {
+        const visibleItems = galleryItems.filter(img => img.style.display !== "none");
+        const index = visibleItems.indexOf(img);
+        showLightbox(index);
+      };
+    });
   </script>
 </body>
 </html>
