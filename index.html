@@ -221,11 +221,13 @@ BHK: ${f.bhk.value}
 Possession: ${f.possession.value}
 Phone: ${f.phone.value}`;
   const msg = encodeURIComponent(msgText);
-  // Pre-fills but won't auto-send—WhatsApp requires user to press send
+
+  // Use one of these:
   window.open(`https://api.whatsapp.com/send?phone=919408884242&text=${msg}`, "_blank");
+  // or: window.open(`whatsapp://send?phone=919408884242&text=${msg}`, "_blank");
+
   document.getElementById("popup").style.display = "none";
 };
-
 
 
     // Counters animation
